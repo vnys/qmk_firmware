@@ -41,3 +41,5 @@
    - etc.
 */
 // #define MIDI_ADVANCED
+
+#define COMBO_TERM 25

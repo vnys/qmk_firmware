@@ -16,7 +16,23 @@
 
 #include QMK_KEYBOARD_H
 
-enum planck_layers { _QWERTY, _FN, _NUMBERS, _LOWER, _RAISE, _ADJUST };
+enum combos {
+    COMBO_BACKSPACE,
+    COMBO_ENTER,
+    COMBO_LENGTH // nifty trick to avoid manually specifying how many combos you have
+};
+
+uint16_t COMBO_LEN = COMBO_LENGTH; // nifty trick continued
+
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(io_combo, KC_BSPC),
+    COMBO(kl_combo, KC_ENT), // keycodes with modifiers are possible too!
+};
+
+enum planck_layers { _QWERTY, _FN, _NUMBERS, _ONESHOTS, _LOWER, _RAISE, _ADJUST };
 
 enum planck_keycodes { QWERTY = SAFE_RANGE, BACKLIT, EXT_PLV };
 
@@ -41,29 +57,38 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define ARING KC_LBRC
 #define OSLASH KC_SCLN
 #define AELIG KC_QUOT
+#define PLUS KC_MINS
 #define FN MO(_FN)
-#define TG_NUMB TG(_NUMBERS)
+#define TO_NUMB TG(_NUMBERS)
 #define TO_QWRT TO(_QWERTY)
+#define ONESHOTS OSL(_ONESHOTS)
 
 [_QWERTY] = LAYOUT_planck_2x2u(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ARING,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    OSLASH,  AELIG,
+    KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ARING,
+    KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    OSLASH,  AELIG,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    TG_NUMB, KC_LCTL, KC_LALT, KC_LGUI,    KC_ENT,           KC_SPC,        FN,      KC_RGUI, KC_RALT, KC_RCTL
+    TO_NUMB, KC_LCTL, KC_LALT, KC_LGUI,    KC_ENT,           KC_SPC,        FN,      KC_RGUI, KC_RALT, ONESHOTS
 ),
 
 
 [_FN] = LAYOUT_planck_2x2u(
-    _______,  _______,  KC_UP,    _______,  _______,  _______,  _______,  _______,  _______,  KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,  KC_BSPC,
+    _______,  _______,  KC_UP,    _______,  _______,  _______,  _______,  _______,  _______,  KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,  _______,
     _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______,  _______,  _______,            _______,          _______,
     _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_MUTE,  _______,  _______,            _______,          _______,
     QK_BOOT,  _______,  _______,  _______,       _______,          _______,         _______,  _______,            _______,          _______
 ),
 
 [_NUMBERS] = LAYOUT_planck_2x2u(
-    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
+    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,
     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+    _______,  _______,  _______,  _______,       _______,          _______,         _______,  _______,  _______,  _______
+),
+
+[_ONESHOTS] = LAYOUT_planck_2x2u(
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_RBRC,
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_NUHS,
+    _______,  KC_GRV,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
     _______,  _______,  _______,  _______,       _______,          _______,         _______,  _______,  _______,  _______
 ),
 
