@@ -55,6 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 
+#define TAPPING_TERM 200
 #define ARING KC_LBRC
 #define OSLASH KC_SCLN
 #define AELIG KC_QUOT
@@ -81,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,  _______,  KC_UP,    _______,  _______,  _______,  _______,  _______,  _______,  KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,  _______,
     _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______,  _______,  _______,            _______,          _______,
     _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_MUTE,  _______,  _______,            _______,          _______,
-    QK_BOOT,  _______,  _______,  _______,       _______,          _______,         _______,  _______,            _______,          _______
+    QK_BOOT,  _______,  _______,  _______,       _______,          _______,         _______,  DT_PRNT,            DT_DOWN,          DT_UP
 ),
 
 [_NUMBERS] = LAYOUT_planck_2x2u(
