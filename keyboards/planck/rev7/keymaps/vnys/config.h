@@ -45,4 +45,7 @@
 
 #define COMBO_TERM 25
 #define BILATERAL_COMBINATIONS
-#define PERMISSIVE_HOLD
+//#define PERMISSIVE_HOLD // not sure if I need this
+#define QUICK_TAP_TERM 0 // going from key to modifier
+#define RETRO_TAPPING // when releasing a home row mod tap key
+

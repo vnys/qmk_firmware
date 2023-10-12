@@ -25,8 +25,20 @@ enum combos {
 
 uint16_t COMBO_LEN = COMBO_LENGTH; // nifty trick continued
 
+// HOMEROW MODS
+#define F_SFT LSFT_T(KC_F)
+#define D_CMD LCMD_T(KC_D)
+#define S_OPT LOPT_T(KC_S)
+#define A_CTL CTL_T(KC_A)
+#define J_SFT RSFT_T(KC_J)
+#define K_CMD RCMD_T(KC_K)
+#define L_OPT LOPT_T(KC_L)
+#define OE_CTL CTL_T(KC_SCLN)
+
+//const uint16_t PROGMEM kl_combo[] = {RSFT_T(KC_J), RGUI_T(KC_K), COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {K_CMD, L_OPT, COMBO_END};
 const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+//const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(io_combo, KC_BSPC),
@@ -60,21 +72,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define OSLASH KC_SCLN
 #define AELIG KC_QUOT
 #define PLUS KC_MINS
+#define AT KC_NUHS
 #define FN MO(_FN)
 #define TO_NUMB TG(_NUMBERS)
 #define TO_QWRT TO(_QWERTY)
 #define ONESHOTS OSL(_ONESHOTS)
 #define LOWER MO(_LOWER)
+#define HIGHER LT(_RAISE, KC_SPC)
 
-// HOMEROW SHIFT
-#define F_SFT LSFT_T(KC_F)
-#define J_SFT RSFT_T(KC_J)
 
 [_QWERTY] = LAYOUT_planck_2x2u(
     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ARING,
-    KC_TAB,  KC_A,    KC_S,    KC_D,    F_SFT,   KC_G,    KC_H,    J_SFT,   KC_K,    KC_L,    OSLASH,  AELIG,
+    KC_TAB,  A_CTL,   S_OPT,   D_CMD,   F_SFT,   KC_G,    KC_H,    J_SFT,   K_CMD,   L_OPT,   OE_CTL,  AELIG,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    _______, KC_LCTL, KC_LALT, KC_LGUI,    LOWER,            KC_SPC,        FN,      KC_RGUI, KC_RALT, ONESHOTS
+    _______, KC_LCTL, KC_LALT, KC_LGUI,    LOWER,            HIGHER,        FN,      KC_RGUI, KC_RALT, KC_ENT
 ),
 
 
@@ -111,15 +122,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_planck_2x2u(
-    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,
-    _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_4,     KC_5,     KC_6,     _______,  KC_NUHS,
-    _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_1,     KC_2,     KC_3,     _______,  _______,
+    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     PLUS,
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_4,     KC_5,     KC_6,     _______,  AT,
+    _______,  KC_GRV,   _______,  _______,  _______,  _______,  _______,  KC_1,     KC_2,     KC_3,     _______,  _______,
     _______,  _______,  _______,  _______,       _______,          KC_0,            _______,  _______,  _______,  _______
 ),
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |      |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   -  |   =  |   [  |   ]  |  \   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -128,11 +139,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = LAYOUT_planck_grid(
-    KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+[_RAISE] = LAYOUT_planck_2x2u(
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_EQL,
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_RBRC,
+    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+    _______,  _______,  _______,  _______,       _______,          _______,         _______,  _______,  _______,  _______
 ),
 
 /* Adjust (Lower + Raise)
