@@ -46,8 +46,8 @@ const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
 combo_t key_combos[] = {
     COMBO(io_combo, KC_BSPC),
     COMBO(kl_combo, KC_ENT),
-    COMBO(sd_combo, KC_ESC),
-    COMBO(we_combo, KC_TAB),
+    COMBO(sd_combo, KC_TAB),
+    COMBO(we_combo, KC_ESC),
 //    COMBO(jk_combo, KC_RSFT),
 //    COMBO(df_combo, KC_LSFT),
 };
