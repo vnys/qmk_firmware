@@ -35,14 +35,21 @@ uint16_t COMBO_LEN = COMBO_LENGTH; // nifty trick continued
 #define L_OPT LOPT_T(KC_L)
 #define OE_CTL CTL_T(KC_SCLN)
 
-//const uint16_t PROGMEM kl_combo[] = {RSFT_T(KC_J), RGUI_T(KC_K), COMBO_END};
+//const uint16_t PROGMEM jk_combo[] = {KC_J, K_CMD, COMBO_END};
+//const uint16_t PROGMEM df_combo[] = {KC_F, D_CMD, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {K_CMD, L_OPT, COMBO_END};
 const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
-//const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {S_OPT, D_CMD, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+
 
 combo_t key_combos[] = {
     COMBO(io_combo, KC_BSPC),
-    COMBO(kl_combo, KC_ENT), // keycodes with modifiers are possible too!
+    COMBO(kl_combo, KC_ENT),
+    COMBO(sd_combo, KC_ESC),
+    COMBO(we_combo, KC_TAB),
+//    COMBO(jk_combo, KC_RSFT),
+//    COMBO(df_combo, KC_LSFT),
 };
 
 enum planck_layers { _QWERTY, _FN, _NUMBERS, _ONESHOTS, _LOWER, _RAISE, _ADJUST };
@@ -81,13 +88,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define HIGHER LT(_RAISE, KC_SPC)
 
 
+//[_QWERTY] = LAYOUT_planck_2x2u(
+//    KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ARING,
+//    KC_TAB,  A_CTL,   S_OPT,   D_CMD,   KC_F,   KC_G,    KC_H,    KC_J,   K_CMD,   L_OPT,   OE_CTL,  AELIG,
+//    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+//    _______, KC_LCTL, KC_LALT, KC_LGUI,    LOWER,            HIGHER,        FN,      KC_RGUI, KC_RALT, KC_ENT
+//),
+
 [_QWERTY] = LAYOUT_planck_2x2u(
     KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    ARING,
     KC_TAB,  A_CTL,   S_OPT,   D_CMD,   F_SFT,   KC_G,    KC_H,    J_SFT,   K_CMD,   L_OPT,   OE_CTL,  AELIG,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
     _______, KC_LCTL, KC_LALT, KC_LGUI,    LOWER,            HIGHER,        FN,      KC_RGUI, KC_RALT, KC_ENT
 ),
-
 
 [_FN] = LAYOUT_planck_2x2u(
     _______,  _______,  KC_UP,    _______,  _______,  _______,  _______,  _______,  _______,  KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,  _______,
